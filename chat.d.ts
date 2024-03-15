@@ -35,3 +35,12 @@ interface SingleHistoryData {
   initial: string;
   current: boolean;
 }
+
+interface ChatResponse {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  chatId: string;
+  response: string;
+  userName: string;
+}

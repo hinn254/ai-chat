@@ -7,9 +7,14 @@ import { sendChat } from "../../utils/actions";
 
 export default function SearchInput({ chatId }: { chatId?: string }) {
   const [userPrompt, setUserPrompt] = useState("");
-  const [isSending, setIsSending] = useState(false);
 
-  const { fetchAllChats } = useContext(ChatContext);
+  const {
+    fetchAllChats,
+    setSpecificChat,
+    specificChat,
+    isSending,
+    setIsSending,
+  } = useContext(ChatContext);
 
   const sendPrompt = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,26 +23,55 @@ export default function SearchInput({ chatId }: { chatId?: string }) {
     const parsedData = userPrompt.trim();
     setUserPrompt("");
 
-    const message: Message = {
-      title: parsedData,
-      createdAt: new Date(),
-      user: {
-        id: "erwrewr324234",
-        name: "Benny Otieno",
-        avatar: "https://ui-avatars.com/api/?name=benny",
-      },
-    };
-
     try {
-      setIsSending(true);
+      if (chatId && specificChat) {
+        let r: ChatResponse = {
+          id: Math.floor(Math.random() * 1000) + 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          chatId: "626cf9ae-5ea4-4f85-aee2-6b88a41af000",
+          response: parsedData,
+          userName: "Benny Otieno",
+        };
 
-      const resp = await sendChat(
-        {
-          title: message.title,
-          userName: message.user.name,
-        },
-        chatId,
-      );
+        setSpecificChat({
+          ...specificChat,
+          chatMessages: [...specificChat.chatMessages!, r],
+        });
+
+        setIsSending(true);
+
+        await sendChat(
+          {
+            title: parsedData,
+            userName: "Benny Otieno",
+          },
+          chatId,
+        );
+      } else {
+        setSpecificChat({
+          id: "626cf9ae-5ea4-4f85-aee2-6b88a41af000",
+          title: parsedData,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          chatMessages: [
+            {
+              id: 1,
+              createdAt: new Date(),
+              updatedAt: new Date(),
+              chatId: "626cf9ae-5ea4-4f85-aee2-6b88a41af000",
+              response: parsedData,
+              userName: "Benny Otieno",
+            },
+          ],
+        });
+
+        setIsSending(true);
+        await sendChat({
+          title: parsedData,
+          userName: "Benny Otieno",
+        });
+      }
     } catch (error) {
       console.error(error);
     } finally {
