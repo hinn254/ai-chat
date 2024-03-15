@@ -6,6 +6,21 @@ import { redirect } from "next/navigation";
 import { pickRandomSampleResponses } from "./data";
 import { db } from "./db";
 
+export async function deleteChatWithId(chatId: string) {
+  try {
+    await db.chat.delete({
+      where: {
+        id: chatId,
+      },
+    });
+    revalidatePath("/", "layout");
+  } catch (error) {
+    console.error(error);
+  } finally {
+    redirect("/");
+  }
+}
+
 async function chatResponse(chatId: string) {
   try {
     const data = await db.chat.update({
@@ -32,24 +47,6 @@ async function chatResponse(chatId: string) {
   }
 }
 
-export async function deleteChatWithId(chatId: string) {
-  console.log(chatId);
-  try {
-    const data = await db.chat.delete({
-      where: {
-        id: chatId,
-      },
-    });
-    revalidatePath("/", "layout");
-
-    console.log({ data }, "deleted");
-  } catch (error) {
-    console.error(error);
-  } finally {
-    redirect("/");
-  }
-}
-
 export async function sendChat(
   message: { title: string; userName: string },
   chatId?: string,
@@ -61,9 +58,17 @@ export async function sendChat(
       data: {
         title,
         chatMessages: {
-          create: {
-            response: title,
-            userName: userName, // username
+          createMany: {
+            data: [
+              {
+                response: title,
+                userName: userName,
+              },
+              {
+                response: pickRandomSampleResponses().content,
+                userName: "AI",
+              },
+            ],
           },
         },
       },
@@ -74,20 +79,26 @@ export async function sendChat(
 
     const { id } = data;
 
-    chatResponse(id);
-
     redirect(`/${id}`);
   } else {
     try {
-      const data = await db.chat.update({
+      await db.chat.update({
         where: {
           id: chatId,
         },
         data: {
           chatMessages: {
-            create: {
-              response: title,
-              userName: userName, // username
+            createMany: {
+              data: [
+                {
+                  response: title,
+                  userName: userName,
+                },
+                {
+                  response: pickRandomSampleResponses().content,
+                  userName: "AI",
+                },
+              ],
             },
           },
         },
@@ -95,9 +106,8 @@ export async function sendChat(
           chatMessages: true,
         },
       });
-      chatResponse(chatId);
+      // chatResponse(chatId);
 
-      // const { id } = data;
       revalidatePath(`/${chatId}`, "layout");
 
       revalidatePath(`/${chatId}`);
