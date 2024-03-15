@@ -1,6 +1,8 @@
+import { ChatContext } from "@/app/context/chatContext";
 import { Prisma } from "@prisma/client";
 import clsx from "clsx";
 import Image from "next/image";
+import { useContext } from "react";
 import AIChatMetadata from "./chat-ai-metadat";
 
 export default function Message({
@@ -8,6 +10,7 @@ export default function Message({
 }: {
   message: Prisma.ChatMessagesGetPayload<{}>;
 }) {
+  const { isSending } = useContext(ChatContext);
   const isAI = message.userName === "AI";
 
   return (
@@ -30,9 +33,16 @@ export default function Message({
           </span>
         </div>
       </div>
-      <p className="pl-5 text-sm text-[#3C414B]">{message.response}</p>
-      {/* {isAI && waitingForAIResponse && <Spinner />} */}
-      {isAI && <AIChatMetadata />}
+      {isAI ? (
+        <>
+          <p className="pl-5 text-sm text-[#3C414B]">{message.response}</p>
+          {isAI && !isSending && <AIChatMetadata />}
+        </>
+      ) : (
+        <>
+          <p className="pl-5 text-sm text-[#3C414B]">{message.response}</p>
+        </>
+      )}
     </div>
   );
 }
