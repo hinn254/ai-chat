@@ -117,6 +117,16 @@ If you ran into this issue, how did you resolve it? - Please reload the page and
 2. Install dependencies:
    `npm install`
 
+3. Create a `.env` file in the root of the project and add the following environment variables (You can use the `.env.example` file as a template):
+
+   ```bash
+    DATABASE_URL="postgresql://username:password@localhost:5432/dbname"
+   ```
+
+   Replace `username`, `password` and `dbname` with your database credentials.
+
+If you are using a different database, you can replace the `DATABASE_URL` with the appropriate connection string and run the migration command for your database.
+
 ## Getting Started
 
 First, run the development server:
