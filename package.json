@@ -9,7 +9,8 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "stylecheck": "prettier --check .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "vercel:build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",
