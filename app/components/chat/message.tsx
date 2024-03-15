@@ -1,6 +1,8 @@
 import { Prisma } from "@prisma/client";
 import clsx from "clsx";
+import { Globe } from "lucide-react";
 import Image from "next/image";
+import ChatReaction from "./chat-reaction";
 
 export default function Message({
   message,
@@ -10,22 +12,38 @@ export default function Message({
   const isAI = message.userName === "AI";
 
   return (
-    <div className={clsx("py-5", isAI && "bg-[#434654] text-white")}>
-      <div className="mx-auto flex  max-w-2xl space-x-5">
+    <div className={clsx(" mx-auto max-w-5xl flex-1 space-x-5 py-5")}>
+      <div className="flex w-full ">
         <Image
           src={
             isAI
-              ? "https://ui-avatars.com/api/?name=AI"
+              ? "https://ui-avatars.com/api/background=4980E1&?name=AI"
               : "https://ui-avatars.com/api/?name=" + message.userName
           }
           width={32}
           height={32}
           alt={message.userName}
-          className="h-8 w-8"
+          className="h-8 w-8 rounded-full"
         />
-
-        <p className="pt-1 text-sm">{message.response}</p>
+        <div className="flex flex-1 flex-col items-start justify-center pl-2">
+          <span className="text-sm font-semibold leading-6 text-[#363D4B]">
+            {message.userName}
+          </span>
+        </div>
       </div>
+      <p className="pl-5 text-sm text-[#3C414B]">{message.response}</p>
+      {isAI && (
+        <div className="pl-5">
+          <p className="mt-1 text-xs font-bold text-gray-500">Sources:</p>
+          <div className="flex w-fit items-center gap-2 rounded-md border p-1 pr-6">
+            <Globe className="h-6 w-6 text-blue-400" aria-hidden="true" />
+            <span className="text-xs text-gray-500">
+              [1] Introduction - Wikipedia Docs
+            </span>
+          </div>
+          <ChatReaction />
+        </div>
+      )}
     </div>
   );
 }
