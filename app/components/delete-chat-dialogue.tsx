@@ -64,9 +64,7 @@ export default function DeleteChatDialogue({
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
                         This will delete{" "}
-                        <span className="font-semibold underline">
-                          {title}{" "}
-                        </span>
+                        <span className="font-semibold underline">{title}</span>{" "}
                         and all its messages.
                       </p>
                     </div>
