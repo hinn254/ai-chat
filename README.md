@@ -3,9 +3,10 @@
 This is a Frontend for a Chat Interface
 
 ## Screenshots
+Desktop View
 ![Screenshot 2024-03-15 at 18 07 28](https://github.com/hinn254/chat-task/assets/58983670/34fea712-0040-4f79-9417-3e64a0551bc3)
+Mobile View
 ![Screenshot 2024-03-15 at 18 47 28](https://github.com/hinn254/chat-task/assets/58983670/b90d2a72-6f23-4c3d-bf2d-988349be1f3c)
-![Screenshot 2024-03-15 at 18 46 57](https://github.com/hinn254/chat-task/assets/58983670/7340126e-c287-4d78-aee0-36f7fea356f6)
 
 ## Here is a link to the deployed version of the web application
 
