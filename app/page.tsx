@@ -1,11 +1,10 @@
-import Chat from "./components/chat/chat";
-import SearchInput from "./components/chat/chat-input";
+import { HomeWrapper } from "./components/home-chat-wrapper";
 
 export default function Page() {
   return (
     <div className="flex h-screen flex-col overflow-hidden">
-      <Chat chatdata={[]} />
-      <SearchInput />
+      {/* no chat data since its new chat thus undefined */}
+      <HomeWrapper data={undefined} />
     </div>
   );
 }
