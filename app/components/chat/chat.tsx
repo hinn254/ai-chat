@@ -6,7 +6,7 @@ type ChatData = Prisma.ChatMessagesGetPayload<{}>;
 
 export default function Chat({ chatdata }: { chatdata?: ChatData[] }) {
   return (
-    <div className="flex-[0.91] overflow-y-auto overflow-x-hidden md:flex-[0.98]">
+    <div className="flex-[0.84] overflow-y-auto overflow-x-hidden md:flex-[0.98]">
       {chatdata?.length === 0 && <EmptyPlaceholder />}
 
       {chatdata?.map((message) => (
