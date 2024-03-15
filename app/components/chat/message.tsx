@@ -1,8 +1,7 @@
 import { Prisma } from "@prisma/client";
 import clsx from "clsx";
-import { Globe } from "lucide-react";
 import Image from "next/image";
-import ChatReaction from "./chat-reaction";
+import AIChatMetadata from "./chat-ai-metadat";
 
 export default function Message({
   message,
@@ -32,18 +31,8 @@ export default function Message({
         </div>
       </div>
       <p className="pl-5 text-sm text-[#3C414B]">{message.response}</p>
-      {isAI && (
-        <div className="pl-5">
-          <p className="mt-1 text-xs font-bold text-gray-500">Sources:</p>
-          <div className="flex w-fit items-center gap-2 rounded-md border p-1 pr-6">
-            <Globe className="h-6 w-6 text-blue-400" aria-hidden="true" />
-            <span className="text-xs text-gray-500">
-              [1] Introduction - Wikipedia Docs
-            </span>
-          </div>
-          <ChatReaction />
-        </div>
-      )}
+      {/* {isAI && waitingForAIResponse && <Spinner />} */}
+      {isAI && <AIChatMetadata />}
     </div>
   );
 }
