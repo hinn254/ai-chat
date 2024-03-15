@@ -19,7 +19,7 @@ export default function DeleteChatDialogue({
     <Transition.Root show={open} as={Fragment}>
       <Dialog
         as="div"
-        className="relative z-40"
+        className="relative z-50"
         initialFocus={cancelButtonRef}
         onClose={setOpen}
       >
