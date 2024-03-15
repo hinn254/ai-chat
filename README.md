@@ -2,6 +2,8 @@
 
 This is a Frontend for a Chat Interface
 
+## Screenshots
+
 ## Here is a link to the deployed version of the web application
 
 [cnat-ui-task](https://insert-link-once-deployed)
