@@ -1,12 +1,15 @@
 "use client";
+import { ChatContext } from "@/app/context/chatContext";
 import { ArrowUpCircleIcon } from "@heroicons/react/20/solid";
 import { Loader2 } from "lucide-react";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { sendChat } from "../../utils/actions";
 
 export default function SearchInput({ chatId }: { chatId?: string }) {
   const [userPrompt, setUserPrompt] = useState("");
   const [isSending, setIsSending] = useState(false);
+
+  const { fetchAllChats } = useContext(ChatContext);
 
   const sendPrompt = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,6 +41,9 @@ export default function SearchInput({ chatId }: { chatId?: string }) {
     } catch (error) {
       console.error(error);
     } finally {
+      if (!chatId) {
+        fetchAllChats();
+      }
       setIsSending(false);
     }
   };
@@ -61,7 +67,7 @@ export default function SearchInput({ chatId }: { chatId?: string }) {
         >
           {isSending ? (
             <>
-              <Loader2 className="h-6 w-6 animate-spin" />
+              <Loader2 className="h-6 w-6 animate-spin text-[#497FE1]" />
             </>
           ) : (
             <ArrowUpCircleIcon
