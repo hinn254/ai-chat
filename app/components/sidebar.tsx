@@ -1,11 +1,11 @@
 "use client";
 import { Dialog, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import { Fragment, useState } from "react";
 import ChatHistory from "./chat-history";
-import NewChat from "./new-chat";
+import NewChat from "./new-chat-initializer";
 import UserProfile from "./user-profile";
-import Image from "next/image";
 
 export default function SideBar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
