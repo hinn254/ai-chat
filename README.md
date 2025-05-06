@@ -12,10 +12,6 @@ This is a Frontend for a Chat Interface
 
 ![Screenshot 2024-03-15 at 18 47 28](https://github.com/hinn254/chat-task/assets/58983670/b90d2a72-6f23-4c3d-bf2d-988349be1f3c)
 
-## Here is a link to the deployed version of the web application
-
-[chat-ui-task](https://chat-task-c8lg-qt5z5tc6d-hinn254.vercel.app)
-
 ## Functionality
 
 - Chat Input that allows users to send messages.
@@ -110,9 +106,9 @@ This is a Frontend for a Chat Interface
 
 I encountered a few challenges while working on this project. The major ones include:
 
-- **Simulating AI chat Response**: I had to simulate the AI chat response by creating a function that would generate a response after a user sends a message. This was a bit challenging since I had to ensure that the response was relevant to the user's message, hence sometimes a bit buggy. With more time, I would have improved this feature and even used a real AI chatbot.
+- **Simulating AI chat Response**: 
 
-If you ran into this issue, how did you resolve it? - Please reload the page and the chat will sync.
+If you ran into this issue, how did you resolve it? - Please reload the page and the chat will sync. I am accepting PR's for this.
 
 ### Installation
 
